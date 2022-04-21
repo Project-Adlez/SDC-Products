@@ -10,10 +10,6 @@ CREATE TABLE products (
   default_price INT
 );
 
-CREATE TABLE related (
-  related_id SERIAL PRIMARY KEY
-);
-
 CREATE TABLE relatedProducts (
   relatedProducts_id SERIAL PRIMARY KEY,
   product_id INT,
@@ -22,15 +18,15 @@ CREATE TABLE relatedProducts (
     FOREIGN KEY (product_id)
       REFERENCES products(product_id),
   CONSTRAINT fk_related
-    FOREIGN KEY (related_id)
-      REFERENCES related(related_id)
+    FOREIGN KEY (product_id)
+      REFERENCES products(product_id)
 );
 
 CREATE TABLE features (
   feature_id SERIAL PRIMARY KEY,
+  product_id INT,
   feature VARCHAR(20),
   value VARCHAR(50),
-  product_id INT,
   CONSTRAINT fk_product
     FOREIGN KEY (product_id)
       REFERENCES products(product_id)
@@ -38,11 +34,11 @@ CREATE TABLE features (
 
 CREATE TABLE styles (
   style_id SERIAL PRIMARY KEY,
-  name VARCHAR(40),
-  original_price INT,
-  sale_price INT,
-  initial BOOLEAN,
   product_id INT,
+  name VARCHAR(40),
+  sale_price VARCHAR(10),
+  original_price INT,
+  default_style BOOLEAN,
   CONSTRAINT fk_product
     FOREIGN KEY (product_id)
       REFERENCES products(product_id)
@@ -50,9 +46,9 @@ CREATE TABLE styles (
 
 CREATE TABLE photos (
   photo_id SERIAL PRIMARY KEY,
-  thumbnail_url TEXT,
-  url TEXT,
   style_id INT,
+  url TEXT,
+  thumbnail_url TEXT,
   CONSTRAINT fk_style
     FOREIGN KEY (style_id)
       REFERENCES styles(style_id)
@@ -60,9 +56,9 @@ CREATE TABLE photos (
 
 CREATE TABLE skus (
   sku_id SERIAL PRIMARY KEY,
-  quantity INT,
-  size VARCHAR(5),
   style_id INT,
+  size VARCHAR(5),
+  quantity INT,
   CONSTRAINT fk_style
     FOREIGN KEY (style_id)
       REFERENCES styles(style_id)
