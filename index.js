@@ -25,8 +25,12 @@ app.get('/products/:id/styles', (req, res, next) => {
     'product_id', (SELECT id FROM products WHERE id = $1),
     'results', (SELECT JSON_AGG(ROW_TO_JSON(styles)) FROM (SELECT id, name, sale_price, original_price, default_style,
       (SELECT JSON_AGG(ROW_TO_JSON(photos)) photos FROM (SELECT thumbnail_url, url FROM photos WHERE style_id = styles.id) photos),
-      (SELECT JSON_AGG(ROW_TO_JSON(skus)) skus FROM (SELECT quantity, size FROM skus WHERE style_id = styles.id) skus)
-      FROM styles WHERE product_id = $1) styles)
+      (SELECT JSON_OBJECT_AGG(
+        "id", JSON_BUILD_OBJECT(
+          'quantity', quantity,
+          'size', size
+          )) AS skus FROM skus WHERE style_id = $1)
+      FROM styles WHERE product_id = $1) styles )
   ) object`, [ req.params.id ], (err, result) => {
     if (err) {
       return next(err);
