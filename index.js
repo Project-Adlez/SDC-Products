@@ -10,6 +10,16 @@ const PORT = 3000;
 
 app.use(bodyParser.json());
 
+app.get('/products/:id/related', (req, res, next) => {
+  db.query('SELECT ARRAY_AGG(related_id) related FROM relatedProducts WHERE product_id = $1', [ req.params.id ], (err, result) => {
+    if (err) {
+      return next(err);
+    }
+    res.send(result.rows[0].related);
+    return result;
+  });
+});
+
 app.get('/products/:id/styles', (req, res, next) => {
   db.query(`SELECT JSON_BUILD_OBJECT(
     'product_id', (SELECT id FROM products WHERE id = $1),
@@ -21,39 +31,34 @@ app.get('/products/:id/styles', (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.send(result.rows[0].object);
-    return result.rows;
+    res.send(result.rows[0]);
+    return result;
   });
-
-  // (SELECT JSON_AGG(ROW_TO_JSON(skus)) skus FROM (SELECT quantity, size FROM skus WHERE style_id = styles.id) skus)
-
-  // SELECT JSON_BUILD_OBJECT(
-  //   'skus', (SELECT ROW_TO_JSON(skus) sku FROM (SELECT * FROM skus WHERE id = $1) skus)
-  // )
-
 });
 
-app.get('/products/:id/', (req, res) => {
+app.get('/products/:id/', (req, res, next) => {
   db.query(`SELECT JSON_BUILD_OBJECT(
-    'product', (SELECT ROW_TO_JSON(products) product FROM (SELECT * FROM products WHERE id = $1) products),
-    'features', (SELECT JSON_AGG(ROW_TO_JSON(features)) FROM (SELECT feature, value FROM features WHERE product_id = $1) features)
+    'product', (SELECT ROW_TO_JSON(products) FROM (SELECT id, name, slogan, description, category, default_price,
+      (SELECT JSON_AGG(ROW_TO_JSON(features)) features FROM (SELECT feature, value FROM features WHERE product_id = $1) features)
+      FROM products WHERE id = $1) products)
   ) object`, [ req.params.id ], (err, result) => {
     if (err) {
-      console.log(err);
+      return next(err);
     }
-    const { product, features } = result.rows[0].object;
-    product.features = features;
-    res.send(product);
+    res.send(result.rows[0].object.product);
+    return result;
   });
 });
 
-app.get('/products', (req, res, next) => {
-  db.query('SELECT * FROM products', (err, result) => {
+app.get('/products/:page/:count', (req, res, next) => {
+  const { page, count } = req.params;
+  const offset = (page - 1) * count;
+  db.query('SELECT * FROM products ORDER BY id LIMIT $1 OFFSET $2', [ count, offset ], (err, result) => {
     if (err) {
       return next(err);
     }
     res.send(result.rows);
-    return result.rows;
+    return result;
   });
 });
 
