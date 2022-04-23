@@ -35,7 +35,7 @@ app.get('/products/:id/styles', (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.send(result.rows[0]);
+    res.send(result.rows[0].object);
     return result;
   });
 });
