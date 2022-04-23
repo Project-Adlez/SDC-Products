@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const db = require('./db');
 
@@ -8,6 +9,7 @@ const db = require('./db');
 const app = express();
 const PORT = 3100;
 
+app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/products/:id/related', (req, res, next) => {
@@ -23,10 +25,10 @@ app.get('/products/:id/related', (req, res, next) => {
 app.get('/products/:id/styles', (req, res, next) => {
   db.query(`SELECT JSON_BUILD_OBJECT(
     'product_id', (SELECT id FROM products WHERE id = $1),
-    'results', (SELECT JSON_AGG(ROW_TO_JSON(styles)) FROM (SELECT id, name, sale_price, original_price, default_style,
-      (SELECT JSON_AGG(ROW_TO_JSON(photos)) photos FROM (SELECT thumbnail_url, url FROM photos WHERE style_id = styles.id) photos),
+    'results', (SELECT JSON_AGG(ROW_TO_JSON(styles)) FROM (SELECT style_id, name, sale_price, original_price, default_style,
+      (SELECT JSON_AGG(ROW_TO_JSON(photos)) photos FROM (SELECT thumbnail_url, url FROM photos WHERE style_id = styles.style_id) photos),
       (SELECT JSON_OBJECT_AGG(
-        "id", JSON_BUILD_OBJECT(
+        "sku_id", JSON_BUILD_OBJECT(
           'quantity', quantity,
           'size', size
           )) AS skus FROM skus WHERE style_id = $1)
@@ -40,7 +42,7 @@ app.get('/products/:id/styles', (req, res, next) => {
   });
 });
 
-app.get('/products/:id/', (req, res, next) => {
+app.get('/products/:id', (req, res, next) => {
   db.query(`SELECT JSON_BUILD_OBJECT(
     'product', (SELECT ROW_TO_JSON(products) FROM (SELECT id, name, slogan, description, category, default_price,
       (SELECT JSON_AGG(ROW_TO_JSON(features)) features FROM (SELECT feature, value FROM features WHERE product_id = $1) features)
