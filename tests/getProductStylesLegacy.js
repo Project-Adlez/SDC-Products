@@ -4,7 +4,7 @@ import http from 'k6/http';
 export default function getProductStyles() {
   const params = {
     headers: {
-      Authorization: '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'
+      Authorization: process.env.PG_AUTHORIZATION
     }
   };
 
