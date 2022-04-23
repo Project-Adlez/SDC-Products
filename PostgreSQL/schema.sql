@@ -1,6 +1,16 @@
--- dropdb Products
--- createdb Products
 -- psql Products < PostgreSQL/schema.sql
+
+DROP TABLE IF EXISTS products CASCADE;
+DROP TABLE IF EXISTS relatedProducts CASCADE;
+DROP TABLE IF EXISTS features CASCADE;
+DROP TABLE IF EXISTS styles CASCADE;
+DROP TABLE IF EXISTS photos CASCADE;
+DROP TABLE IF EXISTS skus CASCADE;
+DROP TABLE IF EXISTS cart CASCADE;
+
+DROP DATABASE IF EXISTS Products;
+
+CREATE DATABASE Products;
 
 CREATE TABLE products (
   id SERIAL PRIMARY KEY,
@@ -17,16 +27,13 @@ CREATE TABLE relatedProducts (
   related_id INT,
   CONSTRAINT fk_product
     FOREIGN KEY (product_id)
-      REFERENCES products(id),
-  CONSTRAINT fk_related
-    FOREIGN KEY (related_id)
       REFERENCES products(id)
 );
 
 CREATE TABLE features (
   id SERIAL PRIMARY KEY,
   product_id INT,
-  feature VARCHAR(20),
+  feature VARCHAR(25),
   value VARCHAR(50),
   CONSTRAINT fk_product
     FOREIGN KEY (product_id)
@@ -58,7 +65,7 @@ CREATE TABLE photos (
 CREATE TABLE skus (
   id SERIAL PRIMARY KEY,
   style_id INT,
-  size VARCHAR(5),
+  size VARCHAR(10),
   quantity INT,
   CONSTRAINT fk_style
     FOREIGN KEY (style_id)
@@ -72,3 +79,8 @@ CREATE TABLE cart (
     FOREIGN KEY (sku_id)
       REFERENCES skus(id)
 );
+
+CREATE INDEX photos_style_id_idx ON photos (style_id) INCLUDE (thumbnail_url, url);
+CREATE INDEX skus_style_id_idx ON skus (style_id) INCLUDE (quantity, size);
+CREATE INDEX styles_product_id_idx ON styles (product_id) INCLUDE (id, name, sale_price, original_price, default_style);
+CREATE INDEX features_product_id_idx ON features (product_id) INCLUDE (feature, value);

@@ -30,7 +30,7 @@ app.get('/products/:id/styles', (req, res, next) => {
           'quantity', quantity,
           'size', size
           )) AS skus FROM skus WHERE style_id = $1)
-      FROM styles WHERE product_id = $1) styles )
+      FROM styles WHERE product_id = $1) styles)
   ) object`, [ req.params.id ], (err, result) => {
     if (err) {
       return next(err);
