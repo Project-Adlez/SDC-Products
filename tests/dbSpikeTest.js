@@ -1,5 +1,7 @@
-import { sleep } from 'k6';
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/no-unresolved */
 import http from 'k6/http';
+import { sleep } from 'k6';
 
 export const options = {
   stages: [
@@ -26,4 +28,4 @@ export default function dbStressTest() {
   sleep(1);
 }
 
-// k6 run --compatibility-mode=base dbSpikeTest.js
+// k6 run dbSpikeTest.js
