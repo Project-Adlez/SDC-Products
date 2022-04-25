@@ -6,7 +6,7 @@ exports.postCart = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.send(result.rows);
+    res.send('Item and quantity successfully added!');
     return result;
   });
 };

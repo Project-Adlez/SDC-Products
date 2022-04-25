@@ -110,5 +110,5 @@ dist
 .DS_Store
 
 # tests
-/tests
-tests/
+tests/getProductsLegacy.js
+tests/getProductStylesLegacy.js
