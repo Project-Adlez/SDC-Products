@@ -111,4 +111,4 @@ dist
 
 # tests
 /tests
-.getProductsLegacy.js
+tests/
