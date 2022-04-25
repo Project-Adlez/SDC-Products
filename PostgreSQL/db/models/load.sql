@@ -1,4 +1,4 @@
--- psql Products < PostgreSQL/load.sql
+-- psql Products < PostgreSQL/db/models/load.sql
 
 COPY products
 FROM '/Users/bradfordtrevino/Documents/RFP2202/SDC/SDC-Products/CSV/CSV Files/product.csv'

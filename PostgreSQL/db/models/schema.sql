@@ -1,4 +1,4 @@
--- psql Products < PostgreSQL/schema.sql
+-- psql Products < PostgreSQL/db/models/schema.sql
 
 DROP TABLE IF EXISTS products CASCADE;
 DROP TABLE IF EXISTS relatedProducts CASCADE;
