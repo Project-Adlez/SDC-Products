@@ -22,7 +22,7 @@ app.get('/products/:id', getProduct);
 app.get('/products/:page/:count', getProducts);
 
 // Cart
-app.post('/cart/:sku_id', postCart);
+app.post('/cart/:skuId/:count', postCart);
 app.get('/cart', getCart);
 
 app.listen(PORT, () => {

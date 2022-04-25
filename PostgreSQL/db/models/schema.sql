@@ -75,6 +75,7 @@ CREATE TABLE skus (
 CREATE TABLE cart (
   cart_id SERIAL PRIMARY KEY,
   sku_id INT,
+  count INT,
   CONSTRAINT fk_sku
     FOREIGN KEY (sku_id)
       REFERENCES skus(sku_id)
