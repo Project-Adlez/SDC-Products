@@ -27,3 +27,5 @@ export default function dbStressTest() {
 
   sleep(1);
 }
+
+// k6 run --compatibility-mode=base dbStressTest.js

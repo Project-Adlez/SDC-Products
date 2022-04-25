@@ -1,5 +1,5 @@
-import http from 'k6/http';
 import { sleep } from 'k6';
+import http from 'k6/http';
 
 export const options = {
   stages: [
@@ -25,3 +25,5 @@ export default function dbStressTest() {
 
   sleep(1);
 }
+
+// k6 run --compatibility-mode=base dbSpikeTest.js
