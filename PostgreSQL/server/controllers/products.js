@@ -21,7 +21,7 @@ exports.getProductStyles = (req, res, next) => {
           'size', size
           )) AS skus FROM skus WHERE style_id = styles.style_id)
       FROM styles WHERE product_id = $1) styles)
-  ) object`, [ req.params.id ], (err, result) => {
+  ) AS object`, [ req.params.id ], (err, result) => {
     if (err) {
       return next(err);
     }

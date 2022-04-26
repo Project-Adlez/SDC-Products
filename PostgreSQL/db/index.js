@@ -1,11 +1,21 @@
 const { Pool } = require('pg');
 
+// Local Pool
+// const pool = new Pool({
+//   user: 'bradfordtrevino',
+//   host: 'localhost',
+//   port: 5432,
+//   password: 'BTnp121821!',
+//   database: 'Products',
+// });
+
+// EC2 Pool
 const pool = new Pool({
-  user: 'bradfordtrevino',
-  host: 'localhost',
+  user: 'postgres',
+  host: '54.203.0.215',
   port: 5432,
   password: 'BTnp121821!',
-  database: 'Products',
+  database: 'products',
 });
 
 // pool.connect((err, client, release) => {
