@@ -16,7 +16,7 @@ export const options = {
 };
 
 export default function dbStressTest() {
-  const BASE_URL = 'http://localhost:3100/';
+  const BASE_URL = 'http://localhost:3100';
 
   const responses = http.batch([
     [ 'GET', `${BASE_URL}/products/500000/10`, null, { tags: { name: 'Products' } } ],
