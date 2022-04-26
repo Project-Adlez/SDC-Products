@@ -19,7 +19,7 @@ exports.getProductStyles = (req, res, next) => {
         "sku_id", JSON_BUILD_OBJECT(
           'quantity', quantity,
           'size', size
-          )) AS skus FROM skus WHERE style_id = $1)
+          )) AS skus FROM skus WHERE style_id = styles.style_id)
       FROM styles WHERE product_id = $1) styles)
   ) object`, [ req.params.id ], (err, result) => {
     if (err) {
