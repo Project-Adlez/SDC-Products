@@ -1,21 +1,29 @@
 const { Pool } = require('pg');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const {
+  PG_USER, PG_HOST, PG_PORT, PG_PASSWORD, PG_DATABASE,
+  EC2_USER, EC2_HOST, EC2_PORT, EC2_PASSWORD, EC2_DATABASE
+} = process.env;
 
 // Local Pool
 // const pool = new Pool({
-//   user: 'bradfordtrevino',
-//   host: 'localhost',
-//   port: 5432,
-//   password: 'BTnp121821!',
-//   database: 'Products',
+//   user: PG_USER,
+//   host: PG_HOST,
+//   port: PG_PORT,
+//   password: PG_PASSWORD,
+//   database: PG_DATABASE,
 // });
 
 // EC2 Pool
 const pool = new Pool({
-  user: 'postgres',
-  host: '54.203.0.215',
-  port: 5432,
-  password: 'BTnp121821!',
-  database: 'products',
+  user: EC2_USER,
+  host: EC2_HOST,
+  port: EC2_PORT,
+  password: EC2_PASSWORD,
+  database: EC2_DATABASE,
 });
 
 // pool.connect((err, client, release) => {
