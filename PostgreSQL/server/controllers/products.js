@@ -35,7 +35,7 @@ exports.getProduct = (req, res, next) => {
     'product', (SELECT ROW_TO_JSON(products) FROM (SELECT id, name, slogan, description, category, default_price,
       (SELECT JSON_AGG(ROW_TO_JSON(features)) features FROM (SELECT feature, value FROM features WHERE product_id = $1) features)
       FROM products WHERE id = $1) products)
-  ) object`, [ req.params.id ], (err, result) => {
+  ) AS object`, [ req.params.id ], (err, result) => {
     if (err) {
       return next(err);
     }
