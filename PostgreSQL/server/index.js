@@ -25,6 +25,10 @@ app.get('/products/:page/:count', getProducts);
 app.post('/cart/:skuId/:count', postCart);
 app.get('/cart', getCart);
 
+app.get('/loaderio-179ed086c115ec52ff0964bd2e5dfeca/', (req, res) => {
+  res.send('loaderio-179ed086c115ec52ff0964bd2e5dfeca');
+});
+
 app.listen(PORT, () => {
   console.log(`The SDC is running on: http://localhost:${PORT}.`);
 });
