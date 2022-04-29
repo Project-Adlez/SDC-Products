@@ -117,3 +117,6 @@ tests/getProductStylesLegacy.js
 Zelda-SDC-Products.pem
 Zelda-SDC-Products-DBMS.pem
 Zelda-SDC-Products-NGINX.pem
+Zelda-SDC-Products-East.pem
+Zelda-SDC-Products-DBMS-East.pem
+Zelda-SDC-Products-NGINX-East.pem
