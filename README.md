@@ -86,7 +86,7 @@ Returns all product level information for a specified product id.
 #### Parameters
 | Parameter  | Type    | Description                                       |
 |------------|---------|---------------------------------------------------|
-| id         | Integer | Selects the page of results to return. Default 1. |
+| id         | Integer | Required ID of the product requesed. Default 1.   |
 
 #### Response
 ```json
