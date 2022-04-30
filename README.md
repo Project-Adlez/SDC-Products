@@ -20,7 +20,15 @@ psql products < PostgreSQL/db/models/schema.sql
 psql products < PostgreSQL/db/models/load.sql
 ```
 
-copy `example.env` to `.env` and configure the variables within.
+Copy `example.env` to `.env` and configure the variables within:
+
+```
+PG_USER=""
+PG_HOST=""
+PG_PORT=""
+PG_PASSWORD=""
+PG_DATABASE=""
+```
 
 ## Run the App
 
