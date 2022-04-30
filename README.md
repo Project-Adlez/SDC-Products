@@ -41,7 +41,7 @@ npm start
 All Queries take parameters as Query strings unless it is in the endpoint /
 All responses should return status code `200 OK`
 
-### `GET /products`
+### `GET /products/:page/:count`
 Retrieve a list of products
 
 #### Parameters
@@ -59,7 +59,7 @@ Retrieve a list of products
         "slogan": "Blend in to your crowd",
         "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
         "category": "Jackets",
-        "default_price": 140
+        "default_price": "140"
     },
     {
         "id": 2,
@@ -67,7 +67,7 @@ Retrieve a list of products
         "slogan": "You've got to wear shades",
         "description": "Where you're going you might not need roads, but you definitely need some shades. Give those baby blues a rest and let the future shine bright on these timeless lenses.",
         "category": "Accessories",
-        "default_price": 69
+        "default_price": "69"
     },
     {
         "id": 3,
@@ -75,7 +75,7 @@ Retrieve a list of products
         "slogan": "Make yourself a morning person",
         "description": "Whether you're a morning person or not.  Whether you're gym bound or not.  Everyone looks good in joggers.",
         "category": "Pants",
-        "default_price": 40
+        "default_price": "40"
     }
 ]
 ```
