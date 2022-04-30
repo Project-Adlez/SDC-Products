@@ -86,7 +86,7 @@ Returns all product level information for a specified product id.
 #### Parameters
 | Parameter  | Type    | Description                                       |
 |------------|---------|---------------------------------------------------|
-| id         | Integer | Required ID of the product requesed. Default 1.   |
+| id         | Integer | Required ID of the product requested.             |
 
 #### Response
 ```json
@@ -96,7 +96,7 @@ Returns all product level information for a specified product id.
     "slogan": "Blend in to your crowd",
     "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
     "category": "Jackets",
-    "default_price": 140,
+    "default_price": "140",
     "features": [
         {
             "feature": "Buttons",
@@ -110,13 +110,13 @@ Returns all product level information for a specified product id.
 }
 ```
 
-### `GET /products/:product_id/styles`
+### `GET /products/:id/styles`
 Returns the all styles available for the given product.
 
 #### Parameters
 | Parameter  | Type    | Description                                       |
 |------------|---------|---------------------------------------------------|
-| product_id | Integer | Selects the page of results to return. Default 1. |
+| id         | Integer | Required ID of the product requested.             |
 
 #### Response
 ```json
@@ -126,9 +126,9 @@ Returns the all styles available for the given product.
         {
             "style_id": 1,
             "name": "Forest Green & Black",
-            "original_price": 140,
+            "original_price": "140",
             "sale_price": null,
-            "default?": true,
+            "default_style": true,
             "photos": [
                 {
                     "url": "placeholder/image.jpg",
@@ -153,7 +153,7 @@ Returns the all styles available for the given product.
         {
             "style_id": 2,
             "name": "Desert Brown & Tan",
-            "original_price": 140,
+            "original_price": "140",
             "sale_price": null,
             "default?": false,
             "photos": [
@@ -181,13 +181,13 @@ Returns the all styles available for the given product.
 }
 ```
 
-### `GET /products/:product_id/related`
+### `GET /products/:id/related`
 Returns the id's of products related to the product specified.
 
 #### Parameters
 | Parameter  | Type    | Description                                       |
 |------------|---------|---------------------------------------------------|
-| product_id | Integer | Selects the page of results to return. Default 1. |
+| product_id | Integer | Required ID of the product requested.             |
 
 #### Response
 ```json
