@@ -4,7 +4,7 @@
 
 This is a node/express application that provides a REST API for the Atelier ecommerce frontend.
 
-The database schema are contained in `/PostgreSQL/db/models`
+The database schema are contained in `/PostgreSQL/db/models/schema.sql`
 
 The node server is contained in `/PostgreSQL/server/index.js`
 
