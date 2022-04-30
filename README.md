@@ -38,7 +38,7 @@ npm start
 
 # API Endpoints
 
-All Queries take parameters as Query strings unless it is in the endpoint
+All Queries take parameters as Query strings unless it is in the endpoint /
 All responses should return status code `200 OK`
 
 ### `GET /products`
