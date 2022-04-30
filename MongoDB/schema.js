@@ -1,39 +1,12 @@
 const mongoose = require('mongoose');
 
-const productSchema = new mongoose.Schema({
+const skuSchema = new mongoose.Schema({
   id: {
     type: Number,
     unique: true
   },
-  name: String,
-  slogan: String,
-  definition: String,
-  category: String,
-  default_price: String,
-  features: [featureSchema],
-  styles: [styleSchema]
-});
-
-const featureSchema = new mongoose.Schema({
-  id: {
-    type: Number,
-    unique: true
-  },
-  feature: String,
-  value: String
-});
-
-const styleSchema = new mongoose.Schema({
-  id: {
-    type: Number,
-    unique: true
-  },
-  name: String,
-  original_price: String,
-  sale_price: String,
-  default: Boolean,
-  photos: [photoSchema],
-  skus: [skuSchema]
+  quantity: Number,
+  size: String
 });
 
 const photoSchema = new mongoose.Schema({
@@ -45,13 +18,40 @@ const photoSchema = new mongoose.Schema({
   url: String
 });
 
-const skuSchema = new mongoose.Schema({
+const styleSchema = new mongoose.Schema({
   id: {
     type: Number,
     unique: true
   },
-  quantity: Number,
-  size: String
+  name: String,
+  original_price: String,
+  sale_price: String,
+  default: Boolean,
+  photos: [ photoSchema ],
+  skus: [ skuSchema ]
+});
+
+const featureSchema = new mongoose.Schema({
+  id: {
+    type: Number,
+    unique: true
+  },
+  feature: String,
+  value: String
+});
+
+const productSchema = new mongoose.Schema({
+  id: {
+    type: Number,
+    unique: true
+  },
+  name: String,
+  slogan: String,
+  definition: String,
+  category: String,
+  default_price: String,
+  features: [ featureSchema ],
+  styles: [ styleSchema ]
 });
 
 const Product = mongoose.model('Product', productSchema);

@@ -13,7 +13,7 @@ exports.getRelatedProducts = (req, res, next) => {
 exports.getProductStyles = (req, res, next) => {
   db.query(`SELECT JSON_BUILD_OBJECT(
     'product_id', (SELECT id FROM products WHERE id = $1),
-    'results', (SELECT JSON_AGG(ROW_TO_JSON(styles)) FROM (SELECT style_id, name, sale_price, original_price, default_style,
+    'results', (SELECT JSON_AGG(ROW_TO_JSON(styles)) FROM (SELECT style_id, name, original_price, sale_price, default_style,
       (SELECT JSON_AGG(ROW_TO_JSON(photos)) photos FROM (SELECT thumbnail_url, url FROM photos WHERE style_id = styles.style_id) photos),
       (SELECT JSON_OBJECT_AGG(
         "sku_id", JSON_BUILD_OBJECT(
