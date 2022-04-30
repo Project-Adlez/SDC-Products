@@ -6,14 +6,18 @@ This is a node/express application that provides a REST API for the Atelier ecom
 
 The database schema are contained in `/PostgreSQL/db/models`
 
-The node server is contained in `PostgreSQL/server/index.js`
+The node server is contained in `/PostgreSQL/server/index.js`
 
 ## Install
 
-Ensure the database is prepared - [ETL](https://github.com/yoshi-sdc/atelier-products/blob/f11541e809aee0693ea8338361b2b97e467098d0/etl/README.md)
+Ensure the database is prepared:
 
 ```
 npm install
+
+psql products < PostgreSQL/db/models/schema.sql
+
+psql products < PostgreSQL/db/models/load.sql
 ```
 
 copy `example.env` to `.env` and configure the variables within.
