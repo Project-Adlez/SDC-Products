@@ -80,13 +80,13 @@ Retrieve a list of products
 ]
 ```
 
-### `GET /products/:product_id`
+### `GET /products/:id`
 Returns all product level information for a specified product id.
 
 #### Parameters
 | Parameter  | Type    | Description                                       |
 |------------|---------|---------------------------------------------------|
-| product_id | Integer | Selects the page of results to return. Default 1. |
+| id         | Integer | Selects the page of results to return. Default 1. |
 
 #### Response
 ```json
